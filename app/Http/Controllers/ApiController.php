@@ -14,10 +14,10 @@ class ApiController extends Controller
          ->get();
          $v = $response -> variables;
          $data = new Data;
-         $data->humiditeSol = $v -> capteur_humidite_sol;
-         $data->humidite_air = $v->capteur_humidite_air;
+         $data->humiditeSol = $v ->capteur_humidite_sol;
+         $data->humidite_air = $v->capteur_humidite_air > 250 ? 0 : $v->capteur_humidite_air;
          $data->humidite_air_b = $v->capteur_humidite_air_b;
-         $data->temperature = $v->capteur_temperature;
+         $data->temperature = $v->capteur_temperature > 100 ? 0 : $v->capteur_temperature;
 
          $data->temperature_b = $v->capteur_temperature_b;
          $data->pluie = $v->capteur_pluie==1 ? false : true ;

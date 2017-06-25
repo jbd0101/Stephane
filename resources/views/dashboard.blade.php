@@ -1,5 +1,108 @@
 @extends('default')
 
 @section('content')
-<h1 class="flow-text center">salut</h1>
+<h1 class="flow-text center">Dashboard</h1>
+<div class="container">
+<p>Ce dashboard est basé sur les données récoltées et émises par l'arduino 192.168.1.99 <br> 
+en cas d'erreur visible par l'ordinateur (ex: température trop élevée,..), cette donnée est mise comme un 0°
+<br>
+<br>
+les données : pluie et arrosage en cours sont des des données binaires : soit oui soit non, donc il est normale que la pente ne soit pas représentatif de la pluie,... (cf : graphique sur l'humidité dans le sol)
+</p>
+</div>
+   <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Heure', 'temperature A', 'temperature B'],
+          @foreach($data as $d)
+          ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['temperature']}},{{$d['temperature_b']}}],
+          @endforeach
+
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('temperature'));
+        chart.draw(data, options);
+      }
+    </script>
+	<h2 class="flow-text container">Graphique des températures</h2>
+    <div id="temperature" style="width: 100%; height: 500px;"></div>
+
+ <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Heure', 'humidite A', 'humidite B'],
+          @foreach($data as $d)
+          ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['humidite_air']}},{{$d['humidite_air_b']}}],
+          @endforeach
+
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('humidity'));
+        chart.draw(data, options);
+      }
+    </script>
+    .
+	<h2 class="flow-text container">Graphique de l'humidité dans l'air</h2>
+
+    <div id="humidity" style="width: 100%; height: 500px;"></div>
+
+
+ <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Heure', 'humidite du sol',"pluie","arrosage"],
+          @foreach($data as $d)
+          ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['humiditeSol']}},{{$d["pluie"]==true ? 1024 : 0}},{{$d['arrosage']==true ? 1024 : 0}}],
+           @endforeach
+
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('sol'));
+        chart.draw(data, options);
+      }
+    </script>
+	<h2 class="flow-text container">Graphique de l humidité dans le sol, de l arrosage et de la pluie </h2>
+
+    <div id="sol" style="width: 100%; height: 500px;"></div>
+	<h2 class="flow-text container">Informations et actions</h2>
+	<div class="container">
+		<div class="row">
+			<div class="col s6">
+				<p> la denière pluie sans arrosage : </p>
+				@if(isset($derniere_pluie[0]))
+				<h2 class="flow-text">{{Carbon\Carbon::parse($derniere_pluie[0]['created_at'])->format("d/m/Y H:i") or 'jamais'}}</h2>
+				@else
+
+				<p>JAMAIS</p>
+				@endif
+			</div>
+		</div>
+	</div>
 @endsection
