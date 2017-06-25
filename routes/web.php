@@ -12,6 +12,7 @@
 */
 
 Route::get("/","DashboardController@index");
+Route::get("/arrose","DashboardController@arrose");
 
 
 Route::get("/LoadDatas","ApiController@home");

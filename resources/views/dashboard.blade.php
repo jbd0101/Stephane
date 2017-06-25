@@ -24,8 +24,6 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
         ]);
 
         var options = {
-          title: 'Company Performance',
-          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
           vAxis: {minValue: 0}
         };
 
@@ -34,7 +32,7 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
       }
     </script>
 	<h2 class="flow-text container">Graphique des températures</h2>
-    <div id="temperature" style="width: 100%; height: 500px;"></div>
+    <div id="temperature" style="width: 100vw; height: 500px;"></div>
 
  <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -50,8 +48,6 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
         ]);
 
         var options = {
-          title: 'Company Performance',
-          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
           vAxis: {minValue: 0}
         };
 
@@ -62,7 +58,7 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
     .
 	<h2 class="flow-text container">Graphique de l'humidité dans l'air</h2>
 
-    <div id="humidity" style="width: 100%; height: 500px;"></div>
+    <div id="humidity" style="width: 100vw; height: 500px;"></div>
 
 
  <script type="text/javascript">
@@ -79,8 +75,6 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
         ]);
 
         var options = {
-          title: 'Company Performance',
-          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
           vAxis: {minValue: 0}
         };
 
@@ -90,18 +84,22 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
     </script>
 	<h2 class="flow-text container">Graphique de l humidité dans le sol, de l arrosage et de la pluie </h2>
 
-    <div id="sol" style="width: 100%; height: 500px;"></div>
+    <div id="sol" style="width: 100vw; height: 500px;"></div>
 	<h2 class="flow-text container">Informations et actions</h2>
 	<div class="container">
 		<div class="row">
 			<div class="col s6">
 				<p> la denière pluie sans arrosage : </p>
 				@if(isset($derniere_pluie[0]))
-				<h2 class="flow-text">{{Carbon\Carbon::parse($derniere_pluie[0]['created_at'])->format("d/m/Y H:i") or 'jamais'}}</h2>
+				<h2 class="flow-text">{{Carbon\Carbon::parse($derniere_pluie[0]['created_at'])->format("d/m/Y H:i")}}</h2>
 				@else
 
 				<p>JAMAIS</p>
 				@endif
+			</div>
+			<div class="col s6">
+				<p><a href="arrose" class="btn btn-large">Arrose 30 secondes</a></p>
+				<p><a href="LoadDatas" class="btn btn-large">Charger les données en bdd</a></p>
 			</div>
 		</div>
 	</div>
