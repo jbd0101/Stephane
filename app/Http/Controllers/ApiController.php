@@ -14,12 +14,12 @@ class ApiController extends Controller
          // ->get();
     
          $data = new Data;
-         $data->humiditeSol = $v ->humiditemoyenne;
-         $data->humidite_air = $v->humidite_air;
-         $data->humidite_air_b = $v->humidite_air_b;
-         $data->temperature = $v->temperature;
+         $data->humiditeSol = $v ->humidite_sol;
+         $data->humidite_air = $v->humidite_serre;
+         $data->humidite_air_b = $v->humidite_ambiante;
+         $data->temperature = $v->temperature_serre;
          
-         $data->temperature_b = $v->temperature_b;
+         $data->temperature_b = $v->temperature_ambiante;
          $data->pluie = false ;
          $data->arrosage = false ;
          $data->save();
