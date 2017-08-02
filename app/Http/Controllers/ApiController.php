@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Data;
 use Illuminate\Http\Request;
 use Ixudra\Curl\Facades\Curl;
+use Thujohn\Twitter\Facades\Twitter;
 
 class ApiController extends Controller
 {
@@ -23,7 +24,22 @@ class ApiController extends Controller
          $data->pluie = false ;
          $data->arrosage = false ;
          $data->save();
+         if ((int)$v->temperature_ambiante > 30 ){
+            $tmp = $v->temperature_ambiante;
 
-		return "data saved";
+            Twitter::postTweet(array('status' => "Il fait vraiment chaud aujourd\hui , il fait ".$tmp."°C, n'oubliez pas de boir !!! ", 'format' => 'json'));
+         }
+        if ((int)$v->temperature_serre > 30 ){
+            $tmp = $v->temperature_serre;
+
+            Twitter::postTweet(array('status' => "Il fait trop chaud dans cette serre, merci de l' ouvir  (".($tmp)."°C) ", 'format' => 'json'));
+         }
+         if((int)$v->humidite_sol <40){
+            $tmp = (string)$v->humidite_sol;
+
+            $txt = "Je meurs de soif , il n y a que (".$tmp."%) d'humidité dans le sol... ";
+            Twitter::postTweet(array('status' => $txt , 'format' => 'json'));
+         }
+		  return "data saved";
     }
 }

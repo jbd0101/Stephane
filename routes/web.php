@@ -1,5 +1,7 @@
 <?php
 
+use Thujohn\Twitter\Facades\Twitter;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,7 +12,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/tweet', function()
+{
+        return Twitter::postTweet(array('status' => 'Twitter API', 'format' => 'json'));
+});
 Route::get("/","DashboardController@index");
 Route::get("/arrose","DashboardController@arrose");
 
