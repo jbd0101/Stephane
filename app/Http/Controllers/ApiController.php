@@ -15,7 +15,7 @@ class ApiController extends Controller
     
          $data = new Data;
          $data->humiditeSol = $v ->humidite_sol;
-         $data->humidite_air = $v->humidite_serre;
+         $data->humidite_air = empty($v->humidite_serre) ? 0 : $v->humidite_serre;
          $data->humidite_air_b = $v->humidite_ambiante;
          $data->temperature = $v->temperature_serre;
          
