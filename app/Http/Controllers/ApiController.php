@@ -23,7 +23,7 @@ class ApiController extends Controller
          $data->temperature_b = $v->temperature_ambiante;
          $data->luminosite = $v->luminosite_ambiante;
          $data->luminositeOmbre=$v->luminosite_ombre;
-         $data->pluie = false ;
+         $data->pluie = $v->pluie_en_cours == "true" ? true : false;
          $data->arrosage = false ;
          $data->save();
          if ((int)$v->temperature_ambiante > 30 ){
@@ -36,7 +36,7 @@ class ApiController extends Controller
 
             Twitter::postTweet(array('status' => "Il fait trop chaud dans cette serre, merci de l' ouvir  (".($tmp)."°C) ", 'format' => 'json'));
          }
-         if((int)$v->humidite_sol <40){
+         if((int)$v->humidite_sol < 40 and ){
             $tmp = (string)$v->humidite_sol;
 
             $txt = "Je meurs de soif , il n y a que (".$tmp."%) d'humidité dans le sol... ";
@@ -52,6 +52,11 @@ class ApiController extends Controller
             $tmp = (string)$v->luminosite_ombre;
 
             $txt = "HéHé, venez donc à l'ombre, il y a plus de lumière !!!!";
+            Twitter::postTweet(array('status' => $txt , 'format' => 'json'));
+         }
+        if($v->pluie_en_cours=="true"){
+
+            $txt = "Comme d'hab il pleut , c est la drache !!!";
             Twitter::postTweet(array('status' => $txt , 'format' => 'json'));
          }
 
