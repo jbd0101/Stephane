@@ -21,7 +21,7 @@ class ApiController extends Controller
          $data->temperature = $v->temperature_serre;
          
          $data->temperature_b = $v->temperature_ambiante;
-         $data->luminosite = $v->luminosite;
+         $data->luminosite = $v->luminosite_ambiante;
          $data->pluie = false ;
          $data->arrosage = false ;
          $data->save();
@@ -41,8 +41,8 @@ class ApiController extends Controller
             $txt = "Je meurs de soif , il n y a que (".$tmp."%) d'humidité dans le sol... ";
             Twitter::postTweet(array('status' => $txt , 'format' => 'json'));
          }
-        if((int)$v->luminosite >85){
-            $tmp = (string)$v->luminosite;
+        if((int)$v->luminosite_ambiante >85){
+            $tmp = (string)$v->luminosite_ambiante;
 
             $txt = "Waww je suis à la côte d'Azur, la luminosite est de  ".$tmp."%";
             Twitter::postTweet(array('status' => $txt , 'format' => 'json'));
