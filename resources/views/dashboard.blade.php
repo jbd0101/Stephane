@@ -69,7 +69,7 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
         var data = google.visualization.arrayToDataTable([
           ['Heure', 'humidite du sol',"pluie","arrosage"],
           @foreach($data as $d)
-          ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['humiditeSol']}},{{$d["pluie"]==true ? 1024 : 0}},{{$d['arrosage']==true ? 1024 : 0}}],
+          ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['humiditeSol']}},{{$d["pluie"]==true ? 100 : 0}},{{$d['arrosage']==true ? 100 : 0}}],
            @endforeach
 
         ]);
