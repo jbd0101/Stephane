@@ -85,6 +85,30 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
 	<h2 class="flow-text container">Graphique de l humidité dans le sol, de l arrosage et de la pluie </h2>
 
     <div id="sol" style="width: 100vw; height: 500px;"></div>
+   <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Heure', 'luminosite'],
+          @foreach($data as $d)
+          ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['luminosite']}}],
+           @endforeach
+
+        ]);
+
+        var options = {
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('luminosite'));
+        chart.draw(data, options);
+      }
+    </script>
+  <h2 class="flow-text container">Graphique de la luminosité </h2>
+
+    <div id="luminosite" style="width: 100vw; height: 500px;"></div>
 	<h2 class="flow-text container">Informations et actions</h2>
 	<div class="container">
 		<div class="row">
