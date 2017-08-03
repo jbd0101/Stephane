@@ -91,9 +91,9 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Heure', 'luminosite'],
+          ['Heure', 'luminosite ambiant',"luminosite ombre"],
           @foreach($data as $d)
-          ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['luminosite']}}],
+          ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['luminosite']}},{{$d['luminositeOmbre']}}],
            @endforeach
 
         ]);
