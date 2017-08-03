@@ -23,8 +23,8 @@ class ApiController extends Controller
          $data->temperature_b = $v->temperature_ambiante;
          $data->luminosite = $v->luminosite_ambiante;
          $data->luminositeOmbre=$v->luminosite_ombre;
-         $data->pluie = $v->pluie_en_cours == "true" ? true : false;
-         $data->arrosage = false ;
+         $data->pluie = $v->pluie_en_cours == "1" ? true : false;
+         $data->arrosage = $v->arrose == "1" ? true : false ;
          $data->save();
          if ((int)$v->temperature_ambiante > 30 ){
             $tmp = $v->temperature_ambiante;
