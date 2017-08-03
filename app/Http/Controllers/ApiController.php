@@ -36,7 +36,7 @@ class ApiController extends Controller
 
             Twitter::postTweet(array('status' => "Il fait trop chaud dans cette serre, merci de l' ouvir  (".($tmp)."°C) ", 'format' => 'json'));
          }
-         if((int)$v->humidite_sol < 40 and ){
+         if((int)$v->humidite_sol < 40 ){
             $tmp = (string)$v->humidite_sol;
 
             $txt = "Je meurs de soif , il n y a que (".$tmp."%) d'humidité dans le sol... ";
