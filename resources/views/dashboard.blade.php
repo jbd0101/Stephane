@@ -16,7 +16,7 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Heure', 'temperature A', 'temperature B',"Humidite A","Humidite B"],
+          ['Heure', 'temperature Serre', 'temperature Ambiate',"Humidite Serre","Humidite Ambiante"],
           @foreach($data as $d)
           ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['temperature']}},{{$d['temperature_b']}},{{$d['humidite_air']}},{{$d['humidite_air_b']}}],
           @endforeach
@@ -34,33 +34,6 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
 	<h2 class="flow-text container">Graphique des températures</h2>
     <div id="temperature" style="width: 100vw; height: 500px;"></div>
 
-{{--  <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Heure', 'humidite A', 'humidite B'],
-          @foreach($data as $d)
-          ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['humidite_air']}},{{$d['humidite_air_b']}}],
-          @endforeach
-
-        ]);
-
-        var options = {
-          vAxis: {minValue: 0}
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('humidity'));
-        chart.draw(data, options);
-      }
-    </script>
-    .
-	<h2 class="flow-text container">Graphique de l'humidité dans l'air</h2>
-
-    <div id="humidity" style="width: 100vw; height: 500px;"></div>
-
- --}}
  <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);

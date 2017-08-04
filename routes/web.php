@@ -16,9 +16,9 @@ use Thujohn\Twitter\Facades\Twitter;
 Route::get('/tweet', function()
 {		
 		$data = Data::orderBy('id', 'desc')->first()->toArray();
-        Twitter::postTweet(array('status' => "Voici la dernière donnée : humidité sol: ".$data["humiditeSol"].", humidite_air: ".$data["humidite_air"], 'format' => 'json'));
-        Twitter::postTweet(array('status' => "temperature: ".$data["temperature"].", humidite_air_b: ".$data["humidite_air_b"], 'format' => 'json'));
-        Twitter::postTweet(array('status' => "temperature_b: ".$data["temperature_b"].", pluie: ".$data["pluie"], 'format' => 'json'));
+        Twitter::postTweet(array('status' => "Voici la dernière donnée : humidité sol: ".$data["humiditeSol"].", humidite air serre: ".$data["humidite_air"], 'format' => 'json'));
+        Twitter::postTweet(array('status' => "temperature serre: ".$data["temperature"].", humidite aire ambiant: ".$data["humidite_air_b"], 'format' => 'json'));
+        Twitter::postTweet(array('status' => "temperature ambiant: ".$data["temperature_b"].", pluie: ".$data["pluie"], 'format' => 'json'));
         Twitter::postTweet(array('status' => " luminosite ambiant: ".$data["luminosite"].", luminosite ombre: ".$data["luminositeOmbre"], 'format' => 'json'));
         Twitter::postTweet(array('status' =>"C est tout mais c'est déjà beaucoup !! :-) ", 'format' => 'json'));
         return "yes";
