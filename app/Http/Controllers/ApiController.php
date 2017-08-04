@@ -59,6 +59,10 @@ class ApiController extends Controller
             $txt = "Comme d'hab il pleut , c est la drache !!!";
             Twitter::postTweet(array('status' => $txt , 'format' => 'json'));
          }
+         if($v->arrose == "1"){
+            Twitter::postTweet(array('status' => "C'est toujours le meme qu il le fait : j'arrose" , 'format' => 'json'));
+
+         }
 
 		  return "data saved";
     }
