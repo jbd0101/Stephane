@@ -20,7 +20,7 @@ Route::get('/tweet', function()
         Twitter::postTweet(array('status' => "temperature: ".$data["temperature"].", humidite_air_b: ".$data["humidite_air_b"], 'format' => 'json'));
         Twitter::postTweet(array('status' => "temperature_b: ".$data["temperature_b"].", pluie: ".$data["pluie"], 'format' => 'json'));
         Twitter::postTweet(array('status' => " luminosite ambiant: ".$data["luminosite"].", luminosite ombre: ".$data["luminositeOmbre"], 'format' => 'json'));
-        Twitter::postTweet(array('status' =>" luminosite ambiant: ".$data["luminosite"].", luminosite ombre: ".$data["luminositeOmbre"].". \n C est tout mais c'est déjà beaucoup !! :-) ", 'format' => 'json'));
+        Twitter::postTweet(array('status' =>"C est tout mais c'est déjà beaucoup !! :-) ", 'format' => 'json'));
         return "yes";
 });
 Route::get("/","DashboardController@index");
