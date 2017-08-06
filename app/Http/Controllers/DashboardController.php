@@ -24,7 +24,7 @@ class DashboardController extends Controller
             }
         }
     	$derniere_pluie = Data::where('pluie',true)->where("arrosage",false)->limit(1)->get()->toArray();
-    	return view("dashboard",["data"=>$$data_divise,"derniere_pluie" => $derniere_pluie]);
+    	return view("dashboard",["data"=>$data_divise,"derniere_pluie" => $derniere_pluie]);
     }
     function arrose(){
     	$response = Curl::to('http://192.168.1.99/arrose')
