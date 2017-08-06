@@ -13,6 +13,16 @@ class DashboardController extends Controller
         Data::where('created_at', '<=', Carbon::now()->subDay(6))->delete();
 
     	$data = Data::where('created_at', '>=', Carbon::today())->get()->toArray();
+        $data_divise = [];
+        $i = 0;
+        foreach ($data as $d) {
+            if($i==0){
+                $i += 1;
+            }else{
+                $data_divise += $d;
+                $i=0;
+            }
+        }
     	$derniere_pluie = Data::where('pluie',true)->where("arrosage",false)->limit(1)->get()->toArray();
     	return view("dashboard",["data"=>$data,"derniere_pluie" => $derniere_pluie]);
     }
