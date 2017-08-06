@@ -14,13 +14,9 @@ class DashboardController extends Controller
 
     	$data = Data::where('created_at', '>=', Carbon::today())->get()->toArray();
         $data_divise = [];
-        $i = 0;
         foreach ($data as $d) {
-            if($i==0){
-                $i += 1;
-            }else{
+            if($d["id"]%2 ==0){
                 array_push($data_divise, $d);
-                $i==0;
             }
         }
     	$derniere_pluie = Data::where('pluie',true)->where("arrosage",false)->limit(1)->get()->toArray();
