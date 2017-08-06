@@ -17,8 +17,15 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Heure', 'temperature Serre', 'temperature Ambiate',"Humidite Serre","Humidite Ambiante"],
+          <?php $i = 0 ; ?>
           @foreach($data as $d)
-          ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['temperature']}},{{$d['temperature_b']}},{{$d['humidite_air']}},{{$d['humidite_air_b']}}],
+          @if($i%2==0)
+            ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['temperature']}},{{$d['temperature_b']}},{{$d['humidite_air']}},{{$d['humidite_air_b']}}],
+          @else
+            <?php continue; ?>
+
+            @endif
+            <?php $i +=1; ?>
           @endforeach
 
         ]);
@@ -41,8 +48,15 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Heure', 'humidite du sol',"pluie","arrosage"],
+          <?php $i = 0 ; ?>
+            <?php $i +=1; ?>
           @foreach($data as $d)
+            @if($i%2==0)
           ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['humiditeSol']}},{{$d["pluie"]==true ? 100 : 0}},{{$d['arrosage']==true ? 100 : 0}}],
+            @else
+            <?php continue; ?>
+            
+            @endif
            @endforeach
 
         ]);
@@ -65,8 +79,15 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Heure', 'luminosite ambiant',"luminosite ombre"],
+          <?php $i = 0 ; ?>
           @foreach($data as $d)
+            @if($i%2==0)
           ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['luminosite']}},{{$d['luminositeOmbre']}}],
+            @else
+            <?php continue; ?>
+            
+            @endif
+            <?php $i +=1; ?>
            @endforeach
 
         ]);
