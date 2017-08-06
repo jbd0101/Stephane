@@ -81,13 +81,14 @@ les données : pluie et arrosage en cours sont des des données binaires : soit 
           ['Heure', 'luminosite ambiant',"luminosite ombre"],
           <?php $i = 0 ; ?>
           @foreach($data as $d)
-            @if($i%2==0)
+            <?php if ($i%2==0){ ?>
           ["{{Carbon\Carbon::parse($d['created_at'])->format("d/m H:i")}}",{{$d['luminosite']}},{{$d['luminositeOmbre']}}],
-            @else
-            <?php continue; ?>
+            <?php 
+          }else{
+              continue; 
+          }
             
-            @endif
-            <?php $i +=1; ?>
+           $i +=1; ?>
            @endforeach
 
         ]);
