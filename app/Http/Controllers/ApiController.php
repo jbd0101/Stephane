@@ -26,6 +26,8 @@ class ApiController extends Controller
          $data->pluie = $v->pluie_en_cours == "1" ? true : false;
          $data->arrosage = $v->arrose == "1" ? true : false ;
          $data->save();
+        try {
+            
          if ((int)$v->temperature_ambiante > 30 ){
             $tmp = $v->temperature_ambiante;
 
@@ -63,6 +65,9 @@ class ApiController extends Controller
             Twitter::postTweet(array('status' => "C'est toujours le meme qu il le fait : j'arrose" , 'format' => 'json'));
 
          }
+        } catch (Exception $e) {
+            echo "";
+        }
 
 		  return "data saved";
     }
